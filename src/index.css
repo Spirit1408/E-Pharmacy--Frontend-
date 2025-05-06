@@ -1,16 +1,20 @@
 :root {
-    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
-    font-weight: 400;
+    font-family: Inter, sans-serif;
 
-    color-scheme: light dark;
-    color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
+    --main-black: #1d1e21;
+    --accent: #59b17a;
+    --accent-2: #e85050;
+    --text: #dcdddf;
+    --background: #e7f1ed;
+    --background-2: #f7f8fa;
+    --background-3: #ffffff;
+    --hover: #3f945f;
 
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    --completed: var(--accent);
+    --confirmed: #8059e4;
+    --pending: #f79042;
+    --cancelled: var(--accent-2);
+    --processing: #70a6e8;
 }
 
 * {
@@ -34,9 +38,12 @@ button {
 }
 
 body {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 117%;
+
     margin: 0;
     display: flex;
-    place-items: center;
     min-width: 320px;
     min-height: 100vh;
 }
