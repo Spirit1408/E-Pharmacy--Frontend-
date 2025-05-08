@@ -60,3 +60,13 @@
         color: var(--accent);
     }
 }
+
+@media (min-resolution: 192dpi){
+    .wrapper::before {
+        background-image: url('/pill@2x.png');
+    }
+    
+    .wrapper::after {
+        background-image: url('/back@2x.png');
+    }
+}

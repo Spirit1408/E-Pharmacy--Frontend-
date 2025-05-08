@@ -103,7 +103,7 @@ export const LoginForm = () => {
 				className={css.submitButton} 
 				disabled={!isValid || isLoading}
 			>
-				{isLoading ? "Загрузка..." : "Log In"}
+				{isLoading ? "Loading..." : "Log In"}
 			</button>
 		</form>
 	);
