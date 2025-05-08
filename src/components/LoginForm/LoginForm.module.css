@@ -1,0 +1,85 @@
+.form {
+    margin-bottom: 234px;
+    input {
+        width: 100%;
+        padding: 13px 18px;
+        background-color: var(--background-3);
+        border: 1px solid rgba(29, 30, 33, 0.1);
+        border-radius: 60px;
+        outline: none;
+        transition: border-color 0.3s ease-in-out;
+        &::placeholder {
+            font-weight: 400;
+            line-height: 150%;
+            color: rgba(29, 30, 33, 0.4);
+        }
+    }
+
+    .green {
+        border-color: var(--accent);
+    }
+
+    .submitButton {
+        border-radius: 60px;
+        padding: 13px;
+        background: var(--accent);
+        border: none;
+        width: 100%;
+        font-size: 14px;
+        line-height: 129%;
+        color: var(--background-3);
+        transition: background 0.3s ease-in-out;
+        &:hover,
+        &:focus {
+            background: var(--hover);
+        }
+        &:disabled {
+            background: rgba(29, 30, 33, 0.1);
+            color: rgba(29, 30, 33, 0.4);
+            pointer-events: none;
+        }
+    }
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 40px;
+}
+
+.inputWrapper {
+    position: relative;
+    width: 100%;
+}
+
+.errorText {
+    color: #ff4d4f;
+    font-size: 12px;
+    margin-top: 4px;
+    margin-left: 18px;
+}
+
+.passwordField {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.togglePassword {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    width: 18px;
+    height: 18px;
+}
+
+.passIcon {
+    width: 18px;
+    height: 18px;
+    stroke: var(--main-black);
+    fill: transparent;
+}
