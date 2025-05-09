@@ -1,56 +1,56 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import api from '../api';
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+
+axios.defaults.baseURL = "https://e-pharmacy-backend-aut9.onrender.com/api";
+axios.defaults.withCredentials = true;
+
+const setAuthHeader = (token) => {
+		axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
+
+const clearAuthHeader = () => {
+	axios.defaults.headers.common.Authorization = "";
+};
 
 export const login = createAsyncThunk(
-  'auth/login',
-  async (credentials, thunkAPI) => {
-    try {
-      const response = await api.post('/user/login', credentials);
-      
-      localStorage.setItem('token', response.data.token);
-      
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(
-        error.response?.data?.message || 'Authorization error'
-      );
-    }
-  }
+	"auth/login",
+	async (credentials, thunkAPI) => {
+		try {
+			const response = await axios.post("/user/login", credentials);
+			setAuthHeader(response.data.data.accessToken);
+			return response.data.data;
+		} catch (e) {
+			return thunkAPI.rejectWithValue(e.response?.data?.message || e.message);
+		}
+	},
 );
 
-export const logout = createAsyncThunk(
-  'auth/logout',
-  async (_, thunkAPI) => {
-    try {
-      await api.post('/user/logout');
-      
-      localStorage.removeItem('token');
-    } catch (error) {
-      return thunkAPI.rejectWithValue(
-        error.response?.data?.message || 'Logout error'
-      );
-    }
-  }
-);
+export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
+	try {
+		await axios.post("/user/logout");
+		clearAuthHeader();
+	} catch (e) {
+		return thunkAPI.rejectWithValue(e.message);
+	}
+});
 
 export const refreshUser = createAsyncThunk(
-  'auth/refresh',
-  async (_, thunkAPI) => {
-    const token = localStorage.getItem('token');
-    
-    if (!token) {
-      return thunkAPI.rejectWithValue('Token not found');
-    }
-    
-    try {
-      api.defaults.headers.common.Authorization = `Bearer ${token}`;
-      
-      const response = await api.post('/user/refresh');
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(
-        error.response?.data?.message || 'Refresh error'
-      );
-    }
-  }
+	"auth/refresh",
+	async (_, thunkAPI) => {
+		const state = thunkAPI.getState();
+		const persistedToken = state.auth.token;
+
+		if (persistedToken === null) {
+			return thunkAPI.rejectWithValue("No valid session");
+		}
+
+		try {
+			const response = await axios.post("/user/refresh");
+			setAuthHeader(response.data.data.accessToken);
+			return response.data.data;
+		} catch (e) {
+			clearAuthHeader();
+			return thunkAPI.rejectWithValue(e.message);
+		}
+	},
 );
