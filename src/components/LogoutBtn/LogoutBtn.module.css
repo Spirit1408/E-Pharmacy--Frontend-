@@ -1,0 +1,21 @@
+.logout {
+    width: 38px;
+    height: 38px;
+    background-color: var(--accent);
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease-in-out;
+    &:hover, &:focus {
+        background-color: var(--hover);
+    }
+}
+
+.icon {
+    width: 14px;
+    height: 14px;
+    fill: var(--background-3);
+}

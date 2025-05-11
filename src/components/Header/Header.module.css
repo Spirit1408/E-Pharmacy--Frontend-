@@ -1,0 +1,87 @@
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 17px;
+    padding-bottom: 17px;
+    position: relative;
+}
+
+.wrapper::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: -20px;
+    right: -20px;
+    height: 1px;
+    background-color: rgba(29, 30, 33, 0.1);
+}
+
+.logoOverlay {
+    display: flex;
+    align-items: center;
+}
+
+.menuBtn {
+    background: none;
+    border: none;
+    width: 32px;
+    height: 32px;
+    margin-right: 20px;
+}
+
+.icon {
+    width: 32px;
+    height: 32px;
+    stroke: var(--main-black);
+}
+
+.logoLink {
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+}
+
+.headerMain {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 120%;
+}
+
+.links {
+    display: flex;
+    max-width: 202px;
+}
+
+.link {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 150%;
+    color: rgba(29, 30, 33, 0.4);
+    white-space: nowrap;
+}
+
+.email {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.link:not(:last-child)::after {
+    content: "|";
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.logoutWrapper {
+    display: none;
+}

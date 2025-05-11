@@ -5,6 +5,8 @@
     gap: 40px;
     position: relative;
     overflow: hidden;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .wrapper::before,
@@ -39,6 +41,8 @@
     align-items: center;
     gap: 14px;
     margin-bottom: 148px;
+    position: relative;
+    z-index: 1;
 }
 
 .logo {
@@ -56,6 +60,9 @@
     font-weight: 600;
     font-size: 28px;
     line-height: 121%;
+    position: relative;
+    max-width: 324px;
+    z-index: 1;
     span {
         color: var(--accent);
     }
