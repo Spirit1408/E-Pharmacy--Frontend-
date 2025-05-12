@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authReducer } from "./auth/slice";
+import { dashboardReducer } from "./dash/slice";
 import {
 	persistStore,
 	persistReducer,
@@ -21,6 +22,7 @@ const authPersistConfig = {
 export const store = configureStore({
 	reducer: {
 		auth: persistReducer(authPersistConfig, authReducer),
+		dashboard: dashboardReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({

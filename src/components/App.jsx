@@ -8,7 +8,7 @@ import { RestrictedRoute } from "./RestrictedRoute";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import { refreshUser } from "../redux/auth/operations";
 import { selectIsRefreshing } from "../redux/auth/selectors";
-import DashboardPage from "../pages/DashboardPage";
+import DashboardPage from "../pages/DashboardPage/DashboardPage";
 import { SharedLayout } from "./SharedLayout/SharedLayout";
 import AllProductsPage from "../pages/AllProductsPage";
 import AllOrdersPage from "../pages/AllOrdersPage";

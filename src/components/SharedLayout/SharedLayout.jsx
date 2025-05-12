@@ -4,10 +4,14 @@ import { Sidebar } from "../Sidebar/Sidebar";
 import { clsx } from "clsx";
 import { useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
+import { selectIsLoading } from "../../redux/auth/selectors";
+import { useSelector } from "react-redux";
+import { Loader } from "../Loader/Loader";
 
 export const SharedLayout = () => {
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 	const location = useLocation();
+	const isLoading = useSelector(selectIsLoading);
 
 	const getPageTitle = () => {
 		const path = location.pathname;
@@ -29,9 +33,11 @@ export const SharedLayout = () => {
 		<div className={clsx(css.wrapper, "container")}>
 			<Header toggleSidebar={toggleSidebar} pageTitle={getPageTitle()} />
 			<Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-			<div className={css.content}>
+			<div>
 				<Outlet />
 			</div>
+
+			{isLoading && <Loader />}
 		</div>
 	);
 };
