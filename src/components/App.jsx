@@ -14,6 +14,7 @@ import AllProductsPage from "../pages/AllProductsPage";
 import AllOrdersPage from "../pages/AllOrdersPage";
 import AllSuppliersPage from "../pages/AllSuppliersPage";
 import AllCustomersPage from "../pages/AllCustomersPage";
+import { Loader } from "./Loader/Loader";
 
 function App() {
 	const dispatch = useDispatch();
@@ -24,7 +25,7 @@ function App() {
 	}, [dispatch]);
 
 	if (isRefreshing) {
-		return <div>Loading...</div>;
+		return <Loader />;
 	}
 
 	return (
@@ -33,7 +34,10 @@ function App() {
 				<Route
 					path="/login"
 					element={
-						<RestrictedRoute component={<LoginPage />} redirectTo="/dashboard" />
+						<RestrictedRoute
+							component={<LoginPage />}
+							redirectTo="/dashboard"
+						/>
 					}
 				/>
 
