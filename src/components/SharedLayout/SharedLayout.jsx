@@ -11,25 +11,27 @@ export const SharedLayout = () => {
 
 	const getPageTitle = () => {
 		const path = location.pathname;
-		
-		if (path.includes('/home')) return 'Dashboard';
-		if (path.includes('/products')) return 'All products';
-		if (path.includes('/orders')) return 'All orders';
-		if (path.includes('/suppliers')) return 'All suppliers';
-		if (path.includes('/customers')) return 'All customers';
-		
-		return 'Dashboard';
+
+		if (path.includes("/dashboard")) return "Dashboard";
+		if (path.includes("/products")) return "All products";
+		if (path.includes("/orders")) return "All orders";
+		if (path.includes("/suppliers")) return "All suppliers";
+		if (path.includes("/customers")) return "All customers";
+
+		return "Dashboard";
 	};
 
 	const toggleSidebar = () => {
-		setIsSidebarOpen(prevState => !prevState);
+		setIsSidebarOpen((prevState) => !prevState);
 	};
 
 	return (
 		<div className={clsx(css.wrapper, "container")}>
 			<Header toggleSidebar={toggleSidebar} pageTitle={getPageTitle()} />
 			<Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-			<div className={css.content}><Outlet /></div>
+			<div className={css.content}>
+				<Outlet />
+			</div>
 		</div>
 	);
 };

@@ -33,7 +33,7 @@ function App() {
 				<Route
 					path="/login"
 					element={
-						<RestrictedRoute component={<LoginPage />} redirectTo="/home" />
+						<RestrictedRoute component={<LoginPage />} redirectTo="/dashboard" />
 					}
 				/>
 
@@ -43,8 +43,8 @@ function App() {
 						<PrivateRoute component={<SharedLayout />} redirectTo="/login" />
 					}
 				>
-					<Route index element={<Navigate to="/home" />} />
-					<Route path="home" element={<DashboardPage />} />
+					<Route index element={<Navigate to="/dashboard" />} />
+					<Route path="dashboard" element={<DashboardPage />} />
 					<Route path="products" element={<AllProductsPage />} />
 					<Route path="orders" element={<AllOrdersPage />} />
 					<Route path="suppliers" element={<AllSuppliersPage />} />

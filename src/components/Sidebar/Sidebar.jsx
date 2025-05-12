@@ -30,7 +30,7 @@ export const Sidebar = ({ isOpen, toggleSidebar }) => {
 				<nav>
 					<ul className={css.navLinks}>
 						<li>
-							<NavLink to="/home" className={getNavLinkClass}>
+							<NavLink to="/dashboard" className={getNavLinkClass}>
 								<svg className={css.icon}>
 									<use href={`${sprite}#icon-dash`} />
 								</svg>

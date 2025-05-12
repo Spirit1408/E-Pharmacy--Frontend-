@@ -22,7 +22,7 @@ export const Header = ({ toggleSidebar, pageTitle = "Dashboard" }) => {
                 </button>
 
                 <Link
-                    to="/home"
+                    to="/dashboard"
                     className={css.logoLink}>
                     <picture>
                         <source srcSet="/logo.png 1x, /logo@2x.png 2x" />
