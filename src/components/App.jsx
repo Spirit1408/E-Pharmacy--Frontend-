@@ -11,7 +11,7 @@ import { selectIsRefreshing } from "../redux/auth/selectors";
 import DashboardPage from "../pages/DashboardPage/DashboardPage";
 import { SharedLayout } from "./SharedLayout/SharedLayout";
 import AllProductsPage from "../pages/AllProductsPage";
-import AllOrdersPage from "../pages/AllOrdersPage";
+import AllOrdersPage from "../pages/AllOrdersPage/AllOrdersPage";
 import AllSuppliersPage from "../pages/AllSuppliersPage";
 import AllCustomersPage from "../pages/AllCustomersPage";
 import { Loader } from "./Loader/Loader";

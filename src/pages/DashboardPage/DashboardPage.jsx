@@ -3,12 +3,12 @@ import { StatCard } from "../../components/StatCard/StatCard";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchDashboardData } from "../../redux/dash/operations";
-import {Table} from "../../components/Table/Table";
+import { UniversalTable } from "../../components/UniversalTable/UniversalTable";
 import {ExpTable} from "../../components/ExpTable/ExpTable";
 
 export default function DashboardPage () {
     const dispatch = useDispatch();
-    const { totalProducts, totalSuppliers, totalCustomers } = useSelector(state => state.dashboard);
+    const { totalProducts, totalSuppliers, totalCustomers, latestCustomers } = useSelector(state => state.dashboard);
 
     useEffect(() => {
         dispatch(fetchDashboardData());
@@ -30,7 +30,10 @@ export default function DashboardPage () {
             />
         </div>
 
-        <Table />
+        <UniversalTable 
+            type="recentCust"
+            data={latestCustomers}
+        />
         <ExpTable />
     </div>;
 }

@@ -37,16 +37,16 @@ export const Sidebar = ({ isOpen, toggleSidebar }) => {
 							</NavLink>
 						</li>
 						<li>
-							<NavLink to="/products" className={getNavLinkClass}>
+							<NavLink to="/orders" className={getNavLinkClass}>
 								<svg className={css.icon}>
-									<use href={`${sprite}#icon-bottle`} />
+									<use href={`${sprite}#icon-cart`} />
 								</svg>
 							</NavLink>
 						</li>
 						<li>
-							<NavLink to="/orders" className={getNavLinkClass}>
+							<NavLink to="/products" className={getNavLinkClass}>
 								<svg className={css.icon}>
-									<use href={`${sprite}#icon-cart`} />
+									<use href={`${sprite}#icon-bottle`} />
 								</svg>
 							</NavLink>
 						</li>

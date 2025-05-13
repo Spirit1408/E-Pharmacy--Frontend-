@@ -11,6 +11,26 @@ export const Table = () => {
     const [isDragging, setIsDragging] = useState(false)
     const [startX, setStartX] = useState(0)
     const [scrollLeft, setScrollLeft] = useState(0)
+
+    const vocabAllOrders = {
+        name: "All orders",
+        fields: ["User info", "Address", "Products", "Order date", "Price", "Status"]
+    }
+
+    const vocabAllProducts = {
+        name: "All products",
+        fields: ["Product info", "Category", "Stock", "Suppliers", "Price", "Action"]
+    }
+
+    const vocabAllSuppliers = {
+        name: "All suppliers",
+        fields: ["Supplier info", "Address", "Company", "Delivery date", "Amount", "Status", "Action"]
+    }
+
+    const vocabAllCustomers = {
+        name: "All customers",
+        fields: ["User info", "Email", "Address", "Phone", "Register date"]
+    }
     
     useEffect(() => {
         if (!tableWrapperRef.current || !scrollbarWrapperRef.current || !scrollbarThumbRef.current) return
