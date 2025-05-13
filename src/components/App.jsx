@@ -13,7 +13,7 @@ import { SharedLayout } from "./SharedLayout/SharedLayout";
 import AllProductsPage from "../pages/AllProductsPage";
 import AllOrdersPage from "../pages/AllOrdersPage/AllOrdersPage";
 import AllSuppliersPage from "../pages/AllSuppliersPage";
-import AllCustomersPage from "../pages/AllCustomersPage";
+import AllCustomersPage from "../pages/AllCustomersPage/AllCustomersPage";
 import { Loader } from "./Loader/Loader";
 
 function App() {
