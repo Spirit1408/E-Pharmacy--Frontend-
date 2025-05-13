@@ -19,11 +19,20 @@ export const Table = () => {
         const scrollbarWrapper = scrollbarWrapperRef.current
         const scrollbarThumb = scrollbarThumbRef.current
         
-        if (scrollbarContentRef.current && tableWrapper.scrollWidth) {
-            scrollbarContentRef.current.style.width = `${tableWrapper.scrollWidth}px`
-            
-            const thumbWidth = Math.max(30, (tableWrapper.clientWidth / tableWrapper.scrollWidth) * scrollbarWrapper.clientWidth)
-            scrollbarThumb.style.width = `${thumbWidth}px`
+        const updateScrollbarDimensions = () => {
+            if (scrollbarContentRef.current && tableWrapper.scrollWidth) {
+                scrollbarContentRef.current.style.width = `${tableWrapper.scrollWidth}px`
+                
+                const ratio = tableWrapper.clientWidth / tableWrapper.scrollWidth
+                const maxThumbWidth = scrollbarWrapper.clientWidth
+                const minThumbWidth = Math.min(20, maxThumbWidth * 0.1)
+                const calculatedWidth = ratio * maxThumbWidth
+                
+                const thumbWidth = Math.min(maxThumbWidth, Math.max(minThumbWidth, calculatedWidth))
+                scrollbarThumb.style.width = `${thumbWidth}px`
+                
+                updateThumbPosition()
+            }
         }
         
         const updateThumbPosition = () => {
@@ -66,18 +75,24 @@ export const Table = () => {
             document.body.style.userSelect = ''
         }
         
-        updateThumbPosition()
+        const handleResize = () => {
+            updateScrollbarDimensions()
+        }
+        
+        updateScrollbarDimensions()
         
         tableWrapper.addEventListener('scroll', handleTableScroll)
         scrollbarThumb.addEventListener('mousedown', handleMouseDown)
         document.addEventListener('mousemove', handleMouseMove)
         document.addEventListener('mouseup', handleMouseUp)
+        window.addEventListener('resize', handleResize)
         
         return () => {
             tableWrapper.removeEventListener('scroll', handleTableScroll)
             scrollbarThumb.removeEventListener('mousedown', handleMouseDown)
             document.removeEventListener('mousemove', handleMouseMove)
             document.removeEventListener('mouseup', handleMouseUp)
+            window.removeEventListener('resize', handleResize)
         }
     }, [isDragging, startX, scrollLeft])
     
