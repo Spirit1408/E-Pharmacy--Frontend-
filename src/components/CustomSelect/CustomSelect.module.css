@@ -1,0 +1,117 @@
+.selectContainer {
+  position: relative;
+  width: 100%;
+}
+
+.selectHeader {
+  width: 100%;
+  border: 1px solid rgba(29, 30, 33, 0.1);
+  border-radius: 60px;
+  background: var(--background-3);
+  padding: 13px 18px;
+  outline: none;
+  transition: border-color 0.3s ease-in-out;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.selectHeader:hover,
+.selectHeader:focus,
+.active {
+  border-color: var(--accent);
+}
+
+.placeholder {
+  color: rgba(29, 30, 33, 0.4);
+}
+
+.selectedText {
+  color: var(--main-black);
+}
+
+.arrow {
+  width: 16px;
+  height: 16px;
+  fill: transparent;
+  stroke: var(--main-black);
+  transition: transform 0.3s ease;
+}
+
+.arrow.up {
+  transform: rotate(-180deg);
+}
+
+.optionsWrapper {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 100%;
+  background: var(--accent);
+  border-radius: 15px;
+  z-index: 999;
+  overflow: hidden;
+  display: flex;
+}
+
+.customScrollbar {
+  width: 8px;
+  background-color: transparent;
+  border-radius: 15px;
+  position: relative;
+  margin-top: 13px;
+  margin-bottom: 13px;
+}
+
+.scrollbarThumb {
+  width: 6px;
+  height: 65px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 15px;
+  position: absolute;
+  right: 8px;
+  top: 0;
+  cursor: pointer;
+}
+
+.optionsContainer {
+  padding: 13px 18px;
+  flex: 1;
+  max-height: 140px;
+  overflow-y: auto;
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+}
+
+.optionsContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.option {
+  cursor: pointer;
+  font-weight: 400;
+  line-height: 150%;
+  color: rgba(255, 255, 255, 0.5);
+  transition: color 0.2s ease;
+}
+
+.option:hover {
+  color: var(--background-3);
+}
+
+.option:not(:last-child){
+  margin-bottom: 8px;
+}
+
+.selected {
+  color: var(--background-3);
+}
+
+.errorText {
+  color: #ff4d4f;
+  font-size: 12px;
+  margin-top: 4px;
+  left: 18px;
+  bottom: -18px;
+}

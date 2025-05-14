@@ -1,0 +1,52 @@
+.inputs{
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 40px;
+}
+
+.inputWrapper {
+    position: relative;
+    width: 100%;
+}
+
+.inputWrapper input,
+.inputWrapper select {
+    width: 100%;
+}
+
+.errorText {
+    color: #ff4d4f;
+    font-size: 12px;
+    margin-top: 4px;
+    left: 18px;
+    bottom: -18px;
+}
+
+.btns {
+    display: flex;
+    gap: 8px;
+}
+
+.addBtn {
+    border: 1px solid var(--accent);
+    color: var(--background-3);
+    background: var(--accent);
+    transition: background-color 0.3s ease-in-out;
+    &:hover, &:focus {
+        background: var(--hover);
+    }
+}
+
+.cancelBtn {
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    background: transparent;
+    transition: background-color 0.3s ease-in-out, border 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.deactive {
+    border: none;
+    color: rgba(29, 30, 33, 0.4);
+    background: rgba(29, 30, 33, 0.1);
+}
