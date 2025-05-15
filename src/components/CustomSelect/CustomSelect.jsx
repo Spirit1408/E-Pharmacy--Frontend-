@@ -12,9 +12,14 @@ export const CustomSelect = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(value || '');
+  const [showScrollbar, setShowScrollbar] = useState(false);
   const selectRef = useRef(null);
   const scrollbarRef = useRef(null);
   const optionsContainerRef = useRef(null);
+
+  useEffect(() => {
+    setSelectedOption(value || '');
+  }, [value]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -34,6 +39,16 @@ export const CustomSelect = ({
     
     const optionsContainer = optionsContainerRef.current;
     const scrollbar = scrollbarRef.current;
+    
+    const checkScrollbarVisibility = () => {
+      const needsScrollbar = optionsContainer.scrollHeight > optionsContainer.clientHeight;
+      setShowScrollbar(needsScrollbar);
+    };
+    
+    checkScrollbarVisibility();
+    
+    if (!showScrollbar) return;
+    
     const thumb = scrollbar.querySelector(`.${css.scrollbarThumb}`);
     
     const updateScrollbarThumb = () => {
@@ -68,19 +83,33 @@ export const CustomSelect = ({
       document.body.style.userSelect = '';
     };
     
-    thumb.addEventListener('mousedown', onThumbMouseDown);
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMouseUp);
+    if (thumb) {
+      thumb.addEventListener('mousedown', onThumbMouseDown);
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', onMouseUp);
+      
+      updateScrollbarThumb();
+    }
     
-    updateScrollbarThumb();
+    const handleResize = () => {
+      checkScrollbarVisibility();
+      if (showScrollbar) {
+        updateScrollbarThumb();
+      }
+    };
+    
+    window.addEventListener('resize', handleResize);
     
     return () => {
       optionsContainer.removeEventListener('scroll', updateScrollbarThumb);
-      thumb.removeEventListener('mousedown', onThumbMouseDown);
+      if (thumb) {
+        thumb.removeEventListener('mousedown', onThumbMouseDown);
+      }
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
+      window.removeEventListener('resize', handleResize);
     };
-  }, [isOpen]);
+  }, [isOpen, showScrollbar]);
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
@@ -120,9 +149,11 @@ export const CustomSelect = ({
             ))}
           </div>
           
-          <div className={css.customScrollbar} ref={scrollbarRef}>
-            <div className={css.scrollbarThumb}></div>
-          </div>
+          {showScrollbar && (
+            <div className={css.customScrollbar} ref={scrollbarRef}>
+              <div className={css.scrollbarThumb}></div>
+            </div>
+          )}
         </div>
       )}
       

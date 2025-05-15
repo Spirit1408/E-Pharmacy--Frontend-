@@ -1,0 +1,21 @@
+.wrapper {
+    padding-top: 40px;
+    padding-bottom: 20px;
+}
+
+.filterWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.addSupBtn {
+    margin-top: -22px;
+    padding: 13px 30px;
+    background-color: transparent;
+    border: 1px solid var(--accent);
+    border-radius: 60px;
+    line-height: 150%;
+    max-width: 177px;
+}

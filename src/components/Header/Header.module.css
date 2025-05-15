@@ -85,3 +85,9 @@
 .logoutWrapper {
     display: none;
 }
+
+@media (max-width: 330px) {
+    .links {
+        flex-wrap: wrap;
+    }
+}

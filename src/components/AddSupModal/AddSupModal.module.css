@@ -1,0 +1,129 @@
+.inputs{
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 40px;
+}
+
+.inputWrapper {
+    position: relative;
+    width: 100%;
+}
+
+.inputWrapper input,
+.inputWrapper select {
+    width: 100%;
+}
+
+.errorText {
+    color: #ff4d4f;
+    font-size: 12px;
+    margin-top: 4px;
+    left: 18px;
+    bottom: -18px;
+}
+
+.btns {
+    display: flex;
+    gap: 8px;
+}
+
+.addBtn {
+    border: 1px solid var(--accent);
+    color: var(--background-3);
+    background: var(--accent);
+    transition: background-color 0.3s ease-in-out;
+    &:hover, &:focus {
+        background: var(--hover);
+    }
+}
+
+.cancelBtn {
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    background: transparent;
+    transition: background-color 0.3s ease-in-out, border 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.deactive {
+    border: none;
+    color: rgba(29, 30, 33, 0.4);
+    background: rgba(29, 30, 33, 0.1);
+}
+
+.dateFieldContainer {
+    position: relative;
+    width: 100%;
+}
+
+.dateInputWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.dateInput {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    border-radius: 30px;
+    border: 1px solid rgba(29, 30, 33, 0.2);
+    background-color: var(--background-3);
+    padding: 0 40px 0 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--main-black);
+    cursor: pointer;
+}
+
+.dateInput::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.dateInput:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.dateInput:hover {
+    border-color: var(--accent);
+}
+
+.datePlaceholder {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: rgba(29, 30, 33, 0.6);
+    pointer-events: none;
+}
+
+.calendarIcon {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.dateIcon {
+    width: 16px;
+    height: 16px;
+    stroke: var(--accent);
+}

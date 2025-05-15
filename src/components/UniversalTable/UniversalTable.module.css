@@ -190,12 +190,12 @@
     background-color: rgba(128, 89, 228, 0.1);
 }
 
-.status.completed {
+.status.completed, .status.active {
     color: var(--accent);
     background-color: rgba(89, 177, 122, 0.1);
 }
 
-.status.cancelled{
+.status.cancelled, .status.deactive {
     color: var(--accent-2);
     background-color: rgba(232, 80, 80, 0.1);
 }
@@ -231,6 +231,23 @@
 
 .actionBtn.delete{
     border-color: var(--accent-2);
-stroke: var(--accent-2);
+    stroke: var(--accent-2);
 }
 
+.actionBtnSup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    border: 1px solid var(--accent);
+    border-radius: 30px;
+    padding: 8px 17px;
+    background-color: transparent;
+    color: var(--accent);
+}
+
+.iconSup {
+    width: 14px;
+    height: 14px;
+    stroke: var(--accent);
+}

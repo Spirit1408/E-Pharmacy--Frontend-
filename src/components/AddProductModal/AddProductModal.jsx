@@ -39,19 +39,25 @@ export const AddProductModal = ({ onSubmit, onCancel, initialData, isEdit }) => 
         mode: 'onChange',
     });
     
-    // Обновляем значения формы при изменении initialData
     useEffect(() => {
         if (initialData) {
-            // Сбрасываем форму с новыми значениями
             reset({
                 name: initialData.name || '',
                 suppliers: initialData.suppliers || '',
                 category: initialData.category || '',
-                stock: initialData.stock?.toString() || '',
-                price: initialData.price?.toString() || '',
+                stock: initialData.stock.toString() || '',
+                price: initialData.price.toString() || '',
+            });
+        } else if (!isEdit) {
+            reset({
+                name: '',
+                suppliers: '',
+                category: '',
+                stock: '',
+                price: '',
             });
         }
-    }, [initialData, reset]);
+    }, [initialData, reset, isEdit]);
     
     const categoryValue = watch('category');
     

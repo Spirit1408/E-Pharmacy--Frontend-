@@ -10,7 +10,7 @@ import {
     selectPagination, 
     selectNameFilter 
 } from '../../redux/products/selectors';
-import { setNameFilter, setPage, resetFilters } from '../../redux/products/slice';
+import { setNameFilter, setPage } from '../../redux/products/slice';
 import { AddProductModal } from '../../components/AddProductModal/AddProductModal';
 import { Modal } from '../../components/Modal/Modal';
 import { toast } from 'react-toastify';

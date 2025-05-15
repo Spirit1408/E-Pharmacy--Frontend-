@@ -12,7 +12,7 @@ import DashboardPage from "../pages/DashboardPage/DashboardPage";
 import { SharedLayout } from "./SharedLayout/SharedLayout";
 import AllProductsPage from "../pages/AllProductsPage/AllProductsPage";
 import AllOrdersPage from "../pages/AllOrdersPage/AllOrdersPage";
-import AllSuppliersPage from "../pages/AllSuppliersPage";
+import AllSuppliersPage from "../pages/AllSuppliersPage/AllSuppliersPage";
 import AllCustomersPage from "../pages/AllCustomersPage/AllCustomersPage";
 import { Loader } from "./Loader/Loader";
 

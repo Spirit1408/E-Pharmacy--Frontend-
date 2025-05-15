@@ -159,13 +159,23 @@ export const UniversalTable = ({
             case 'sup':
                 return (
                     <tr key={index}>
-                        <td>{item.supplierInfo}</td>
+                        <td>{item.name}</td>
                         <td>{item.address}</td>
-                        <td>{item.company}</td>
-                        <td>{item.deliveryDate}</td>
+                        <td>{item.suppliers}</td>
+                        <td>{item.date}</td>
                         <td>{item.amount}</td>
-                        <td>{item.status}</td>
-                        <td>{/* Action buttons */}</td>
+                        <td><p className={css.status + " " + css[item.status.toLowerCase()]}>{item.status}</p></td>
+                        <td>
+                            <button 
+                                className={css.actionBtnSup}
+                                onClick={() => onEdit && onEdit(item)}
+                            >
+                                <svg className={css.iconSup}>
+                                    <use href={`${sprite}#icon-edit`} />
+                                </svg>
+                                Edit
+                            </button>
+                        </td>
                     </tr>
                 );
             case 'cust':
