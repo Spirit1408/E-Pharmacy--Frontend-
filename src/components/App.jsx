@@ -10,7 +10,7 @@ import { refreshUser } from "../redux/auth/operations";
 import { selectIsRefreshing } from "../redux/auth/selectors";
 import DashboardPage from "../pages/DashboardPage/DashboardPage";
 import { SharedLayout } from "./SharedLayout/SharedLayout";
-import AllProductsPage from "../pages/AllProductsPage";
+import AllProductsPage from "../pages/AllProductsPage/AllProductsPage";
 import AllOrdersPage from "../pages/AllOrdersPage/AllOrdersPage";
 import AllSuppliersPage from "../pages/AllSuppliersPage";
 import AllCustomersPage from "../pages/AllCustomersPage/AllCustomersPage";

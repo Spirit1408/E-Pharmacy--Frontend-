@@ -204,3 +204,33 @@
     color: #70a6e8;
     background-color: rgba(112, 166, 232, 0.1);
 }
+
+.actionBtnWrapper {
+    display: flex;
+    gap: 8px;
+}
+
+.actionBtn {
+    width: 32px;
+    height: 32px;
+    stroke: var(--main-black);
+    background-color: transparent;
+    cursor: pointer;
+    border: 1px solid var(--main-black);
+    border-radius: 50%;
+    svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+.actionBtn.edit{
+    border-color: var(--accent);
+    stroke: var(--accent);
+}
+
+.actionBtn.delete{
+    border-color: var(--accent-2);
+stroke: var(--accent-2);
+}
+

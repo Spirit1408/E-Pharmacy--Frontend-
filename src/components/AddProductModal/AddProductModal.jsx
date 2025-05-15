@@ -3,9 +3,10 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { CustomSelect } from '../CustomSelect/CustomSelect';
+import { useEffect } from 'react';
 
 const productSchema = yup.object({
-  productInfo: yup.string().required('Product info is required'),
+  name: yup.string().required('Product name is required'),
   category: yup.string().oneOf(['Medicine', 'Heart', 'Head', 'Hand', 'Leg', 'Dental care', 'Skin care'], 'Invalid category'),
   suppliers: yup.string().required('Suppliers is required'),
   stock: yup
@@ -14,7 +15,7 @@ const productSchema = yup.object({
     .required('Stock is required'),
   price: yup
     .string()
-    .matches(/^[0-9]*$/, 'Price must be a number')
+    .matches(/^[0-9.]*$/, 'Price must be a number')
     .required('Price is required'),
 });
 
@@ -29,7 +30,7 @@ export const AddProductModal = ({ onSubmit, onCancel, initialData, isEdit }) => 
     } = useForm({
         resolver: yupResolver(productSchema),
         defaultValues: initialData || {
-            productInfo: '',
+            name: '',
             suppliers: '',
             category: '',
             stock: '',
@@ -37,6 +38,20 @@ export const AddProductModal = ({ onSubmit, onCancel, initialData, isEdit }) => 
         },
         mode: 'onChange',
     });
+    
+    // Обновляем значения формы при изменении initialData
+    useEffect(() => {
+        if (initialData) {
+            // Сбрасываем форму с новыми значениями
+            reset({
+                name: initialData.name || '',
+                suppliers: initialData.suppliers || '',
+                category: initialData.category || '',
+                stock: initialData.stock?.toString() || '',
+                price: initialData.price?.toString() || '',
+            });
+        }
+    }, [initialData, reset]);
     
     const categoryValue = watch('category');
     
@@ -69,9 +84,9 @@ export const AddProductModal = ({ onSubmit, onCancel, initialData, isEdit }) => 
                     <input 
                         type="text" 
                         placeholder="Product info" 
-                        {...register('productInfo')} 
+                        {...register('name')} 
                     />
-                    {errors.productInfo && <p className={css.errorText}>{errors.productInfo.message}</p>}
+                    {errors.name && <p className={css.errorText}>{errors.name.message}</p>}
                 </div>
                 
                 <div className={css.inputWrapper}>

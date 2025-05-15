@@ -1,10 +1,13 @@
 import css from './UniversalTable.module.css'
 import { useRef, useEffect, useState } from 'react'
+import sprite from '/sprite.svg'
 
 export const UniversalTable = ({ 
     type,            
     data,            
     pagination,
+    onEdit,
+    onDelete
 }) => {
     const tableWrapperRef = useRef(null)
     const scrollbarWrapperRef = useRef(null)
@@ -128,12 +131,29 @@ export const UniversalTable = ({
             case 'prod':
                 return (
                     <tr key={index}>
-                        <td>{item.productInfo}</td>
+                        <td>{item.name}</td>
                         <td>{item.category}</td>
                         <td>{item.stock}</td>
                         <td>{item.suppliers}</td>
                         <td>{item.price}</td>
-                        <td>{/* Action buttons */}</td>
+                        <td>{<div className={css.actionBtnWrapper}>
+                            <button 
+                                className={css.actionBtn + " " + css.edit}
+                                onClick={() => onEdit && onEdit(item)}
+                            >
+                                <svg>
+                                    <use href={`${sprite}#icon-edit`} />
+                                </svg>
+                            </button>
+                            <button 
+                                className={css.actionBtn + " " + css.delete}
+                                onClick={() => onDelete && onDelete(item._id)}
+                            >
+                                <svg>
+                                    <use href={`${sprite}#icon-trash`} />
+                                </svg>
+                            </button>
+                        </div>}</td>
                     </tr>
                 );
             case 'sup':

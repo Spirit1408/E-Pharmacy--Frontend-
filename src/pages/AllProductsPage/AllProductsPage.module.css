@@ -1,0 +1,41 @@
+.wrapper {
+    padding-top: 40px;
+    padding-bottom: 20px;
+}
+
+.filterWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 20px;
+}
+
+.newProductBtnWrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: -22px;
+}
+
+.newProductBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border: none;
+    border-radius: 50%;
+    transition: background-color 0.3s ease-in-out;
+    font-size: 25px;
+    color: var(--background-3);
+    &:hover,
+    &:focus {
+        background-color: var(--hover);
+    }
+}
+
+.newProductBtnText {
+    font-size: 14px;
+    line-height: 129%;
+}
