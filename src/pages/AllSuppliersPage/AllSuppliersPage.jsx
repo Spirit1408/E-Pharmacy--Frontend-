@@ -14,6 +14,7 @@ import {
 	selectCurrentPage,
 	selectTotalPages,
 	selectError,
+	selectNameFilter,
 } from "../../redux/suppliers/selectors";
 import { setNameFilter, setPage } from "../../redux/suppliers/slice";
 import { Loader } from "../../components/Loader/Loader";
@@ -28,13 +29,14 @@ export default function AllSuppliersPage() {
 	const currentPage = useSelector(selectCurrentPage);
 	const totalPages = useSelector(selectTotalPages);
 	const error = useSelector(selectError);
+	const nameFilter = useSelector(selectNameFilter);
 	const [editModalOpen, setEditModalOpen] = useState(false);
 	const [addModalOpen, setAddModalOpen] = useState(false);
 	const [currentSupplier, setCurrentSupplier] = useState(null);
 
 	useEffect(() => {
 		dispatch(getSuppliers());
-	}, [dispatch, currentPage]);
+	}, [dispatch, currentPage, nameFilter]);
 
 	const handleFilterSubmit = (data) => {
 		dispatch(setNameFilter(data.searchQuery));

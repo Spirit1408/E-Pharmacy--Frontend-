@@ -8,6 +8,7 @@ import {
 	selectError,
 	selectCurrentPage,
 	selectTotalPages,
+	selectNameFilter,
 } from "../../redux/orders/selectors";
 import { setPage, setNameFilter } from "../../redux/orders/slice";
 import { UniversalTable } from "../../components/UniversalTable/UniversalTable";
@@ -22,10 +23,11 @@ export default function AllOrdersPage() {
 	const error = useSelector(selectError);
 	const currentPage = useSelector(selectCurrentPage);
 	const totalPages = useSelector(selectTotalPages);
+	const nameFilter = useSelector(selectNameFilter);
 
 	useEffect(() => {
 		dispatch(getOrders());
-	}, [dispatch, currentPage]);
+	}, [dispatch, currentPage, nameFilter]);
 
 	const handlePageChange = (page) => {
 		dispatch(setPage(page));

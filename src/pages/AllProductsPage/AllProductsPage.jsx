@@ -12,7 +12,8 @@ import {
 import {
 	selectProducts,
 	selectIsLoading,
-	selectPagination,
+	selectCurrentPage,
+	selectTotalPages,
 	selectNameFilter,
 	selectError,
 } from "../../redux/products/selectors";
@@ -26,7 +27,8 @@ export default function AllProductsPage() {
 	const dispatch = useDispatch();
 	const products = useSelector(selectProducts);
 	const isLoading = useSelector(selectIsLoading);
-	const pagination = useSelector(selectPagination);
+	const currentPage = useSelector(selectCurrentPage);
+	const totalPages = useSelector(selectTotalPages);
 	const nameFilter = useSelector(selectNameFilter);
 	const error = useSelector(selectError);
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,11 +37,12 @@ export default function AllProductsPage() {
 
 	useEffect(() => {
 		dispatch(getProducts());
-	}, [dispatch, pagination.page, nameFilter]);
+	}, [dispatch, currentPage, nameFilter]);
 
 	const handleFilterSubmit = (data) => {
 		dispatch(setNameFilter(data.searchQuery));
 		dispatch(setPage(1));
+		dispatch(getProducts());
 	};
 
 	const handlePageChange = (page) => {
@@ -170,8 +173,8 @@ export default function AllProductsPage() {
 				type="prod"
 				data={products}
 				pagination={{
-					currentPage: pagination.page,
-					totalPages: pagination.totalPages,
+					currentPage,
+					totalPages,
 					onPageChange: handlePageChange,
 				}}
 				onEdit={handleOpenEditModal}
