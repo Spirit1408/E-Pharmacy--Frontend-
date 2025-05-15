@@ -9,7 +9,8 @@ import {
     selectIsLoading, 
     selectPagination, 
     selectCurrentPage, 
-    selectTotalPages 
+    selectTotalPages,
+    selectError
 } from '../../redux/suppliers/selectors';
 import { setNameFilter, setPage, resetFilters } from '../../redux/suppliers/slice';
 import { Loader } from '../../components/Loader/Loader';
@@ -24,6 +25,7 @@ export default function AllSuppliersPage () {
     const pagination = useSelector(selectPagination);
     const currentPage = useSelector(selectCurrentPage);
     const totalPages = useSelector(selectTotalPages);
+    const error = useSelector(selectError);
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [addModalOpen, setAddModalOpen] = useState(false);
     const [currentSupplier, setCurrentSupplier] = useState(null);
@@ -137,11 +139,11 @@ export default function AllSuppliersPage () {
         onPageChange: handlePageChange
     };
 
-    if (isLoading) {
-        return <Loader />;
-    }
-    
     return <div className={css.wrapper}>
+        {isLoading && <Loader />}
+        
+        {error && toast.error(error)}
+        
         <div className={css.filterWrapper}>
             <Filter 
                 type="sup" 
@@ -157,12 +159,14 @@ export default function AllSuppliersPage () {
             </button>
         </div>
 
-        <UniversalTable 
-            type="sup" 
-            data={formattedSuppliers}
-            pagination={tablePagination}
-            onEdit={handleEditSupplier}
-        />
+        {!isLoading && !error && (
+            <UniversalTable 
+                type="sup" 
+                data={formattedSuppliers}
+                pagination={tablePagination}
+                onEdit={handleEditSupplier}
+            />
+        )}
 
         <Modal 
             isOpen={addModalOpen} 

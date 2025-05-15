@@ -8,7 +8,8 @@ import {
     selectProducts, 
     selectIsLoading, 
     selectPagination, 
-    selectNameFilter 
+    selectNameFilter,
+    selectError
 } from '../../redux/products/selectors';
 import { setNameFilter, setPage } from '../../redux/products/slice';
 import { AddProductModal } from '../../components/AddProductModal/AddProductModal';
@@ -22,6 +23,7 @@ export default function AllProductsPage () {
     const isLoading = useSelector(selectIsLoading);
     const pagination = useSelector(selectPagination);
     const nameFilter = useSelector(selectNameFilter);
+    const error = useSelector(selectError);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false);
     const [currentProduct, setCurrentProduct] = useState(null);
@@ -141,11 +143,11 @@ export default function AllProductsPage () {
         }
     };
 
-    if (isLoading) {
-        return <Loader />;
-    }
-
     return <div className={css.wrapper}>
+        {isLoading && <Loader />}
+        
+        {error && toast.error(error)}
+        
         <div className={css.filterWrapper}>
             <Filter 
                 type="prod"
@@ -164,17 +166,19 @@ export default function AllProductsPage () {
             </div>
         </div>
 
-        <UniversalTable 
-            type="prod" 
-            data={products} 
-            pagination={{
-                currentPage: pagination.page,
-                totalPages: pagination.totalPages,
-                onPageChange: handlePageChange
-            }}
-            onEdit={handleOpenEditModal}
-            onDelete={handleDeleteProduct}
-        />
+        {!isLoading && !error && (
+            <UniversalTable 
+                type="prod" 
+                data={products} 
+                pagination={{
+                    currentPage: pagination.page,
+                    totalPages: pagination.totalPages,
+                    onPageChange: handlePageChange
+                }}
+                onEdit={handleOpenEditModal}
+                onDelete={handleDeleteProduct}
+            />
+        )}
 
         <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
             <AddProductModal 

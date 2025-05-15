@@ -1,15 +1,21 @@
 import clsx from "clsx";
 import css from "./LoginPage.module.css";
 import { LoginForm } from "../../components/LoginForm/LoginForm";
-import { selectIsLoading } from "../../redux/auth/selectors";
+import { selectIsLoading, selectError } from "../../redux/auth/selectors";
 import { useSelector } from "react-redux";
 import { Loader } from "../../components/Loader/Loader";
+import { toast } from "react-toastify";
 
 export default function LoginPage() {
 	const isLoading = useSelector(selectIsLoading);
+	const error = useSelector(selectError);
 
 	return (
 		<div className={clsx(css.wrapper, "container")}>
+			{isLoading && <Loader />}
+			
+			{error && toast.error(error)}
+			
 			<div>
 				<div className={css.logoWrapper}>
 					<picture>
@@ -27,9 +33,7 @@ export default function LoginPage() {
 				</h1>
 			</div>
 
-			<LoginForm />
-
-			{isLoading && <Loader />}
+			{!isLoading && !error && <LoginForm />}
 		</div>
 	);
 }

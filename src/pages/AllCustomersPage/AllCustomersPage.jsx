@@ -10,10 +10,12 @@ import {
   selectPagination, 
   selectCurrentPage,
   selectTotalPages,
-  selectNameFilter
+  selectNameFilter,
+  selectError
 } from "../../redux/customers/selectors";
 import { setNameFilter, setPage, resetFilters } from "../../redux/customers/slice";
 import { Loader } from "../../components/Loader/Loader";
+import { toast } from "react-toastify";
 
 export default function AllCustomersPage() {
   const dispatch = useDispatch();
@@ -22,6 +24,7 @@ export default function AllCustomersPage() {
   const currentPage = useSelector(selectCurrentPage);
   const totalPages = useSelector(selectTotalPages);
   const nameFilter = useSelector(selectNameFilter);
+  const error = useSelector(selectError);
 
   useEffect(() => {
     dispatch(getCustomers());
@@ -46,11 +49,13 @@ export default function AllCustomersPage() {
 
   return (
     <div className={css.wrapper}>
+      {isLoading && <Loader />}
+      
+      {error && toast.error(error)}
+      
       <Filter onSubmit={handleFilterSubmit} type="other" />
       
-      {isLoading ? (
-        <Loader />
-      ) : (
+      {!isLoading && !error && (
         <UniversalTable 
           type="cust" 
           data={customers.map(customer => ({
