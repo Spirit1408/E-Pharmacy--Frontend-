@@ -17,8 +17,7 @@ import AllCustomersPage from "../pages/AllCustomersPage/AllCustomersPage";
 import { Loader } from "./Loader/Loader";
 
 function App() {
-
-	const dispatch = useDispatch();	
+	const dispatch = useDispatch();
 	const isRefreshing = useSelector(selectIsRefreshing);
 
 	useEffect(() => {

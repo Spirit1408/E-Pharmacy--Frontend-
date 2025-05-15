@@ -4,68 +4,65 @@ import { UniversalTable } from "../../components/UniversalTable/UniversalTable";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCustomers } from "../../redux/customers/operations";
-import { 
-  selectCustomers, 
-  selectIsLoading, 
-  selectPagination, 
-  selectCurrentPage,
-  selectTotalPages,
-  selectNameFilter,
-  selectError
+import {
+	selectCustomers,
+	selectIsLoading,
+	selectCurrentPage,
+	selectTotalPages,
+	selectNameFilter,
+	selectError,
 } from "../../redux/customers/selectors";
-import { setNameFilter, setPage, resetFilters } from "../../redux/customers/slice";
+import { setNameFilter, setPage } from "../../redux/customers/slice";
 import { Loader } from "../../components/Loader/Loader";
 import { toast } from "react-toastify";
 
 export default function AllCustomersPage() {
-  const dispatch = useDispatch();
-  const customers = useSelector(selectCustomers);
-  const isLoading = useSelector(selectIsLoading);
-  const currentPage = useSelector(selectCurrentPage);
-  const totalPages = useSelector(selectTotalPages);
-  const nameFilter = useSelector(selectNameFilter);
-  const error = useSelector(selectError);
+	const dispatch = useDispatch();
+	const customers = useSelector(selectCustomers);
+	const isLoading = useSelector(selectIsLoading);
+	const currentPage = useSelector(selectCurrentPage);
+	const totalPages = useSelector(selectTotalPages);
+	const nameFilter = useSelector(selectNameFilter);
+	const error = useSelector(selectError);
 
-  useEffect(() => {
-    dispatch(getCustomers());
-  }, [dispatch, currentPage, nameFilter]);
+	useEffect(() => {
+		dispatch(getCustomers());
+	}, [dispatch, currentPage, nameFilter]);
 
-  const handleFilterSubmit = (data) => {
-    dispatch(setNameFilter(data.searchQuery));
-    dispatch(setPage(1));
-    dispatch(getCustomers());
-  };
+	const handleFilterSubmit = (data) => {
+		dispatch(setNameFilter(data.searchQuery));
+		dispatch(setPage(1));
+		dispatch(getCustomers());
+	};
 
-  const handlePageChange = (page) => {
-    dispatch(setPage(page));
-    dispatch(getCustomers());
-  };
+	const handlePageChange = (page) => {
+		dispatch(setPage(page));
+		dispatch(getCustomers());
+	};
 
-  const paginationConfig = {
-    currentPage,
-    totalPages,
-    onPageChange: handlePageChange
-  };
+	const paginationConfig = {
+		currentPage,
+		totalPages,
+		onPageChange: handlePageChange,
+	};
 
-  return (
-    <div className={css.wrapper}>
-      {isLoading && <Loader />}
-      
-      {error && toast.error(error)}
-      
-      <Filter onSubmit={handleFilterSubmit} type="other" />
-      
-      {!isLoading && !error && (
-        <UniversalTable 
-          type="cust" 
-          data={customers.map(customer => ({
-            ...customer,
-            photo: customer.photo || customer.image, 
-            registerDate: customer.register_date
-          }))} 
-          pagination={paginationConfig}
-        />
-      )}
-    </div>
-  );
+	return (
+		<div className={css.wrapper}>
+			{isLoading && <Loader />}
+
+			{error && toast.error(error)}
+
+			<Filter onSubmit={handleFilterSubmit} type="other" />
+
+			<UniversalTable
+				type="cust"
+				data={customers.map((customer) => ({
+					...customer,
+					photo: customer.photo || customer.image,
+					registerDate: customer.register_date,
+				}))}
+				pagination={paginationConfig}
+			/>
+		</div>
+	);
 }

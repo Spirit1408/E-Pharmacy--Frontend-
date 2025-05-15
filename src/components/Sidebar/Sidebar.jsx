@@ -11,14 +11,17 @@ export const Sidebar = ({ isOpen, toggleSidebar }) => {
 		}
 	};
 
-	const getNavLinkClass = ({ isActive }) => 
+	const getNavLinkClass = ({ isActive }) =>
 		isActive ? clsx(css.link, css.activeLink) : css.link;
 
 	return (
-		<div className={clsx(css.sidebarOverlay, { [css.isOpen]: isOpen })} onClick={handleOverlayClick}>
+		<div
+			className={clsx(css.sidebarOverlay, { [css.isOpen]: isOpen })}
+			onClick={handleOverlayClick}
+		>
 			<aside className={css.wrapper}>
-				<button 
-					type="button" 
+				<button
+					type="button"
 					className={css.closeButton}
 					onClick={toggleSidebar}
 				>

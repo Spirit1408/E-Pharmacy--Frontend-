@@ -13,9 +13,9 @@ export default function LoginPage() {
 	return (
 		<div className={clsx(css.wrapper, "container")}>
 			{isLoading && <Loader />}
-			
+
 			{error && toast.error(error)}
-			
+
 			<div>
 				<div className={css.logoWrapper}>
 					<picture>

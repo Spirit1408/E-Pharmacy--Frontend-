@@ -17,7 +17,7 @@
 }
 
 .wrapper::before {
-    background-image: url('/pill.png');
+    background-image: url("/pill.png");
     background-repeat: no-repeat;
     background-size: contain;
     width: 95px;
@@ -27,7 +27,7 @@
 }
 
 .wrapper::after {
-    background-image: url('/back.png');
+    background-image: url("/back.png");
     background-repeat: no-repeat;
     background-size: contain;
     width: 465px;
@@ -68,12 +68,12 @@
     }
 }
 
-@media (min-resolution: 192dpi){
+@media (min-resolution: 192dpi) {
     .wrapper::before {
-        background-image: url('/pill@2x.png');
+        background-image: url("/pill@2x.png");
     }
-    
+
     .wrapper::after {
-        background-image: url('/back@2x.png');
+        background-image: url("/back@2x.png");
     }
 }

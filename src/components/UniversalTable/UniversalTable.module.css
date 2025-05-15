@@ -20,8 +20,8 @@
     border: 1px solid rgba(29, 30, 33, 0.1);
     border-top: none;
     overflow-x: auto;
-    scrollbar-width: none; 
-    -ms-overflow-style: none; 
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 .tableWrapper::-webkit-scrollbar {
@@ -190,17 +190,19 @@
     background-color: rgba(128, 89, 228, 0.1);
 }
 
-.status.completed, .status.active {
+.status.completed,
+.status.active {
     color: var(--accent);
     background-color: rgba(89, 177, 122, 0.1);
 }
 
-.status.cancelled, .status.deactive {
+.status.cancelled,
+.status.deactive {
     color: var(--accent-2);
     background-color: rgba(232, 80, 80, 0.1);
 }
 
-.status.processing{
+.status.processing {
     color: #70a6e8;
     background-color: rgba(112, 166, 232, 0.1);
 }
@@ -224,12 +226,12 @@
     }
 }
 
-.actionBtn.edit{
+.actionBtn.edit {
     border-color: var(--accent);
     stroke: var(--accent);
 }
 
-.actionBtn.delete{
+.actionBtn.delete {
     border-color: var(--accent-2);
     stroke: var(--accent-2);
 }

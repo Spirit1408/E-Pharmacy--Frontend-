@@ -1,4 +1,4 @@
-.inputs{
+.inputs {
     display: flex;
     flex-direction: column;
     gap: 14px;
@@ -33,7 +33,8 @@
     color: var(--background-3);
     background: var(--accent);
     transition: background-color 0.3s ease-in-out;
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
         background: var(--hover);
     }
 }
@@ -42,7 +43,8 @@
     border: 1px solid var(--accent);
     color: var(--accent);
     background: transparent;
-    transition: background-color 0.3s ease-in-out, border 0.3s ease-in-out, color 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out, border 0.3s ease-in-out,
+        color 0.3s ease-in-out;
 }
 
 .deactive {
@@ -66,10 +68,10 @@
     width: 100%;
     height: 40px;
     border-radius: 30px;
-    border: 1px solid rgba(29, 30, 33, 0.2);
+    border: 1px solid rgba(29, 30, 33, 0.1);
     background-color: var(--background-3);
     padding: 0 40px 0 14px;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 12px;
     font-weight: 500;
     color: var(--main-black);

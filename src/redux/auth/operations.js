@@ -6,7 +6,7 @@ axios.defaults.baseURL = "https://e-pharmacy-backend-aut9.onrender.com/api";
 axios.defaults.withCredentials = true;
 
 const setAuthHeader = (token) => {
-		axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+	axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
 const clearAuthHeader = () => {

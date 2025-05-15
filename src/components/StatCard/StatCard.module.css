@@ -3,7 +3,7 @@
     background: var(--background-3);
     border: 1px solid rgba(29, 30, 33, 0.1);
     border-radius: 8px;
-    width: calc((100% - 20px)/2);
+    width: calc((100% - 20px) / 2);
 }
 
 .headGroup {

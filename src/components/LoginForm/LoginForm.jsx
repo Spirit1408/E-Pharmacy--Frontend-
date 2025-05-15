@@ -55,7 +55,7 @@ export const LoginForm = () => {
 					<input
 						type="text"
 						placeholder="Email address"
-                        autoComplete="off"
+						autoComplete="off"
 						className={clsx({
 							[css.green]: dirtyFields.email && !errors.email,
 						})}
@@ -98,9 +98,9 @@ export const LoginForm = () => {
 				</div>
 			</div>
 			{error && <p className={css.errorText}>{error}</p>}
-			<button 
-				type="submit" 
-				className={css.submitButton} 
+			<button
+				type="submit"
+				className={css.submitButton}
 				disabled={!isValid || isLoading}
 			>
 				{isLoading ? "Loading..." : "Log In"}
