@@ -19,3 +19,24 @@
     line-height: 150%;
     max-width: 177px;
 }
+
+@media (min-width: 768px) {
+    .wrapper {
+        padding-top: 50px;
+        padding-bottom: 32px;
+    }
+    
+    .filterWrapper {
+        display: flex;
+        flex-direction: row;
+        gap: unset;
+        justify-content: space-between;
+    }
+    
+    .addSupBtn {
+        margin-top: unset;
+        font-size: 14px;
+        line-height: 129%;
+        max-width: 196px;
+    }
+}

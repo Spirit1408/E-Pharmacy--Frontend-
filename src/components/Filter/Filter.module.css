@@ -50,3 +50,18 @@
     height: 14px;
     fill: var(--background-3);
 }
+
+@media (min-width: 768px) {
+    .filter {
+        gap: 14px;
+        margin-bottom: unset;
+    }
+
+    .input {
+        max-width: 224px;
+    }
+
+    .filterBtn {
+        max-width: 116px;
+    }
+}

@@ -39,3 +39,32 @@
     font-size: 14px;
     line-height: 129%;
 }
+
+@media (min-width: 768px) {
+    .wrapper {
+        padding-top: 50px;
+        padding-bottom: 32px;
+    }
+    
+    .filterWrapper {
+        display: flex;
+        flex-direction: row;
+        gap: unset;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    
+    .newProductBtnWrapper {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: unset;
+    }
+    
+    .newProductBtn {
+        width: 42px;
+        height: 42px;
+        font-size: 27px;
+    }
+}

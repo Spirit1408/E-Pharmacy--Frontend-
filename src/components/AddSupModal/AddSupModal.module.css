@@ -129,3 +129,19 @@
     height: 16px;
     stroke: var(--accent);
 }
+
+@media (min-width: 768px) {
+    .inputs {
+        flex-direction: row;
+        gap: 14px 8px;
+        flex-wrap: wrap;
+    }
+
+    .inputWrapper {
+        max-width: 224px;
+    }
+
+    .dateInput {
+        height: 44px;
+    }
+}

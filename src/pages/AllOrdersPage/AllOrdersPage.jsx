@@ -45,7 +45,9 @@ export default function AllOrdersPage() {
 
 			{error && toast.error(error)}
 
-			<Filter onSubmit={handleFilterSubmit} type="other" />
+			<div className={css.filterWrapper}>
+				<Filter onSubmit={handleFilterSubmit} type="other" />
+			</div>
 
 			<UniversalTable
 				type="order"

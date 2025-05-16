@@ -52,3 +52,17 @@
     color: rgba(29, 30, 33, 0.4);
     background: rgba(29, 30, 33, 0.1);
 }
+
+@media (min-width: 768px) {
+    .inputs {
+        flex-direction: row;
+        gap: 14px 8px;
+        flex-wrap: wrap;
+        margin-bottom: 40px;
+    }
+
+    .inputWrapper {
+        position: relative;
+        max-width: 224px;
+    }
+}
