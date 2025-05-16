@@ -33,7 +33,7 @@ export default function LoginPage() {
 				</h1>
 			</div>
 
-			{!isLoading && !error && <LoginForm />}
+			<LoginForm />
 		</div>
 	);
 }

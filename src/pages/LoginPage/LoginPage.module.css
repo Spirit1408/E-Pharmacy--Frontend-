@@ -5,8 +5,8 @@
     gap: 40px;
     position: relative;
     overflow: hidden;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 24px;
+    padding-bottom: 24px;
 }
 
 .wrapper::before,
@@ -75,5 +75,34 @@
 
     .wrapper::after {
         background-image: url("/back@2x.png");
+    }
+}
+
+@media (min-width: 768px) {
+    .wrapper {
+        gap: 50px;
+    }
+
+    .wrapper::before {
+        width: 179px;
+        height: 175px;
+        top: 168px;
+        right: 141px;
+    }
+
+    .wrapper::after {
+        width: 465px;
+        height: 345px;
+        bottom: -82px;
+    }
+
+    .logoWrapper {
+        margin-bottom: 204px;
+    }
+
+    .title {
+        font-size: 54px;
+        line-height: 111%;
+        max-width: 614px;
     }
 }
