@@ -30,3 +30,29 @@
     font-size: 16px;
     line-height: 125%;
 }
+
+@media (min-width: 768px) {
+    .wrapper {
+        padding: 14px 18px;
+        width: calc((100% - 40px) / 3);
+    }
+
+    .headGroup {
+        margin-bottom: 28px;
+    }
+
+    .icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .title {
+        font-size: 12px;
+        line-height: 150%;
+    }
+
+    .value {
+        font-size: 24px;
+        line-height: 133%;
+    }
+}

@@ -20,3 +20,15 @@
     height: 14px;
     fill: var(--background-3);
 }
+
+@media (min-width: 768px) {
+    .logout {
+        width: 44px;
+        height: 44px;
+    }
+
+    .icon {
+        width: 16px;
+        height: 16px;
+    }
+}

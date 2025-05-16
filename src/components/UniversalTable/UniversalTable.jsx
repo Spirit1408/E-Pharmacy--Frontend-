@@ -16,6 +16,7 @@ export const UniversalTable = ({
 	const [isDragging, setIsDragging] = useState(false);
 	const [startX, setStartX] = useState(0);
 	const [scrollLeft, setScrollLeft] = useState(0);
+	const [showScrollbar, setShowScrollbar] = useState(true);
 
 	const tableTypes = {
 		prod: {
@@ -90,6 +91,15 @@ export const UniversalTable = ({
 					Math.max(minThumbWidth, calculatedWidth),
 				);
 				scrollbarThumb.style.width = `${thumbWidth}px`;
+
+				if (
+					thumbWidth >= maxThumbWidth ||
+					tableWrapper.scrollWidth <= tableWrapper.clientWidth
+				) {
+					setShowScrollbar(false);
+				} else {
+					setShowScrollbar(true);
+				}
 
 				updateThumbPosition();
 			}
@@ -229,7 +239,7 @@ export const UniversalTable = ({
 					<tr key={index}>
 						<td>
 							<img src={item.photo} alt="client" />
-							{item.name}
+							<p>{item.name}</p>
 						</td>
 						<td>{item.email}</td>
 						<td>{item.address}</td>
@@ -242,7 +252,7 @@ export const UniversalTable = ({
 					<tr key={index}>
 						<td>
 							<img src={item.photo} alt="client" />
-							{item.name}
+							<p>{item.name}</p>
 						</td>
 						<td>{item.address}</td>
 						<td>{item.products}</td>
@@ -284,7 +294,9 @@ export const UniversalTable = ({
 			dots.push(
 				<button
 					key={i}
-					className={`${css.paginationDot} ${i === pagination.currentPage ? css.activeDot : ""}`}
+					className={`${css.paginationDot} ${
+						i === pagination.currentPage ? css.activeDot : ""
+					}`}
 					onClick={() => pagination.onPageChange(i)}
 					aria-label={`Page ${i}`}
 				/>,
@@ -322,12 +334,17 @@ export const UniversalTable = ({
 
 			{renderPaginationDots()}
 
-			<div className={css.externalScrollbarContainer}>
-				<div className={css.externalScrollbar} ref={scrollbarWrapperRef}>
-					<div className={css.scrollbarContent} ref={scrollbarContentRef}></div>
-					<div className={css.scrollbarThumb} ref={scrollbarThumbRef}></div>
+			{showScrollbar && (
+				<div className={css.externalScrollbarContainer}>
+					<div className={css.externalScrollbar} ref={scrollbarWrapperRef}>
+						<div
+							className={css.scrollbarContent}
+							ref={scrollbarContentRef}
+						></div>
+						<div className={css.scrollbarThumb} ref={scrollbarThumbRef}></div>
+					</div>
 				</div>
-			</div>
+			)}
 		</div>
 	);
 };

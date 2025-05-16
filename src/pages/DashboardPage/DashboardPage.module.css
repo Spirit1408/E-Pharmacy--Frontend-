@@ -9,3 +9,14 @@
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
+@media (min-width: 768px) {
+    .wrapper {
+        padding-bottom: 40px;
+    }
+    
+    .statsWrapper {
+        flex-wrap: nowrap;
+        margin-bottom: 40px;
+    }
+}

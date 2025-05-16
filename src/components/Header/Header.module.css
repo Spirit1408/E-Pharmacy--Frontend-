@@ -91,3 +91,32 @@
         flex-wrap: wrap;
     }
 }
+
+@media (min-width: 768px) {
+    .wrapper {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+    
+    .wrapper::after {
+        left: -32px;
+        right: -32px;
+    }
+    
+    .logoLink {
+        margin-right: 32px;
+    }
+    
+    .title {
+        font-size: 24px;
+        line-height: 117%;
+    }
+    
+    .links {
+        max-width: unset;
+    }
+    
+    .logoutWrapper {
+        display: none;
+    }
+}

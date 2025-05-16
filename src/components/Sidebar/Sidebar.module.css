@@ -3,7 +3,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     z-index: 999;
     background-color: rgba(0, 0, 0, 0.5);
     opacity: 0;
@@ -21,7 +21,7 @@
     height: 100vh;
     width: fit-content;
     padding: 20px;
-    position: absolute;
+    position: sticky;
     top: 0;
     left: 0;
     z-index: 1000;
@@ -89,5 +89,18 @@
     transition: fill 0.3s ease;
 }
 
-.logoutWrapper {
+@media (min-width: 768px) {
+    .navLinks {
+        margin-top: 100px;
+    }
+
+    .link {
+        width: 44px;
+        height: 44px;
+    }
+
+    .icon {
+        width: 16px;
+        height: 16px;
+    }
 }
