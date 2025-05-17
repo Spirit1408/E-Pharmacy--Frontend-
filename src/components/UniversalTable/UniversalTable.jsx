@@ -16,7 +16,7 @@ export const UniversalTable = ({
 	const [isDragging, setIsDragging] = useState(false);
 	const [startX, setStartX] = useState(0);
 	const [scrollLeft, setScrollLeft] = useState(0);
-	const [showScrollbar, setShowScrollbar] = useState(false); // Начальное состояние - скрыт
+	const [showScrollbar, setShowScrollbar] = useState(false); 
 
 	const tableTypes = {
 		prod: {
@@ -79,18 +79,13 @@ export const UniversalTable = ({
 
 		const updateScrollbarDimensions = () => {
 			if (scrollbarContentRef.current && tableWrapper) {
-				// Устанавливаем ширину контента скроллбара равной ширине таблицы
 				scrollbarContentRef.current.style.width = `${tableWrapper.scrollWidth}px`;
 
-				// Проверяем, нужен ли скроллбар (таблица шире контейнера)
 				const needScrollbar = tableWrapper.scrollWidth > tableWrapper.clientWidth;
 				
-				// Обновляем состояние отображения скроллбара
 				setShowScrollbar(needScrollbar);
 				
-				// Если скроллбар нужен, настраиваем его размеры
 				if (needScrollbar) {
-					// Расчет ширины ползунка
 					const ratio = tableWrapper.clientWidth / tableWrapper.scrollWidth;
 					const maxThumbWidth = scrollbarWrapper.clientWidth;
 					const minThumbWidth = Math.min(20, maxThumbWidth * 0.1);
@@ -102,7 +97,6 @@ export const UniversalTable = ({
 					);
 					scrollbarThumb.style.width = `${thumbWidth}px`;
 					
-					// Обновляем позицию ползунка
 					updateThumbPosition();
 				}
 			}
@@ -141,13 +135,14 @@ export const UniversalTable = ({
 			const tableScrollWidth =
 				tableWrapper.scrollWidth - tableWrapper.clientWidth;
 
-			const scrollRatio = deltaX / scrollbarTrackWidth;
-			const newScrollLeft = Math.max(
-				0,
-				Math.min(tableScrollWidth, scrollLeft + scrollRatio * tableScrollWidth),
-			);
+			const scrollRatio = tableScrollWidth / scrollbarTrackWidth;
 
-			tableWrapper.scrollLeft = newScrollLeft;
+			const newScrollLeft = scrollLeft + deltaX * scrollRatio;
+
+			tableWrapper.scrollLeft = Math.max(
+				0,
+				Math.min(tableScrollWidth, newScrollLeft),
+			);
 			updateThumbPosition();
 		};
 
@@ -157,16 +152,27 @@ export const UniversalTable = ({
 		};
 
 		const handleResize = () => {
-			updateScrollbarDimensions();
+			setTimeout(() => {
+				updateScrollbarDimensions();
+			}, 50);
 		};
 
-		// Добавляем ResizeObserver для отслеживания изменений размера родительского контейнера
 		const resizeObserver = new ResizeObserver(() => {
 			updateScrollbarDimensions();
 		});
 		
 		if (tableWrapper) {
 			resizeObserver.observe(tableWrapper);
+		}
+		
+		const intersectionObserver = new IntersectionObserver((entries) => {
+			if (entries[0].isIntersecting) {
+				updateScrollbarDimensions();
+			}
+		}, { threshold: 0.1 });
+		
+		if (tableWrapper) {
+			intersectionObserver.observe(tableWrapper);
 		}
 
 		const initialTimer = setTimeout(() => {
@@ -190,12 +196,13 @@ export const UniversalTable = ({
 			window.removeEventListener("mouseup", handleMouseUp);
 			window.removeEventListener("resize", handleResize);
 			resizeObserver.disconnect();
+			intersectionObserver.disconnect();
 			clearTimeout(initialTimer);
 		};
 	}, [isDragging, startX, scrollLeft]);
 
 	useEffect(() => {
-		const checkAndUpdateScrollbar = () => {
+		const updateScrollbarOnDataChange = () => {
 			if (tableWrapperRef.current) {
 				const tableWrapper = tableWrapperRef.current;
 				
@@ -221,67 +228,57 @@ export const UniversalTable = ({
 					);
 					scrollbarThumbRef.current.style.width = `${thumbWidth}px`;
 					
-					const updateThumbPosition = () => {
-						if (!tableWrapper || !scrollbarWrapperRef.current || !scrollbarThumbRef.current) return;
-
-						const scrollRatio =
-							tableWrapper.scrollLeft /
-							(tableWrapper.scrollWidth - tableWrapper.clientWidth);
-						const maxThumbPosition =
-							scrollbarWrapperRef.current.clientWidth - scrollbarThumbRef.current.offsetWidth;
-						const thumbPosition = scrollRatio * maxThumbPosition;
-
-						scrollbarThumbRef.current.style.transform = `translateX(${thumbPosition}px)`;
-					};
-					
 					updateThumbPosition();
-					
-					const handleTableScroll = () => {
-						updateThumbPosition();
-					};
-					
-					const handleMouseDown = (e) => {
-						setIsDragging(true);
-						setStartX(e.clientX);
-						setScrollLeft(tableWrapper.scrollLeft);
-						document.body.style.userSelect = "none";
-					};
-					
-					tableWrapper.removeEventListener("scroll", handleTableScroll);
-					scrollbarThumbRef.current.removeEventListener("mousedown", handleMouseDown);
-					
-					tableWrapper.addEventListener("scroll", handleTableScroll);
-					scrollbarThumbRef.current.addEventListener("mousedown", handleMouseDown);
-					
-					return () => {
-						tableWrapper.removeEventListener("scroll", handleTableScroll);
-						if (scrollbarThumbRef.current) {
-							scrollbarThumbRef.current.removeEventListener("mousedown", handleMouseDown);
-						}
-					};
 				}
 			}
 		};
 		
-		const timer = setTimeout(() => {
-			const cleanup = checkAndUpdateScrollbar();
-			return () => {
-				if (cleanup) cleanup();
-			};
-		}, 100);
+		const updateThumbPosition = () => {
+			if (
+				!tableWrapperRef.current || 
+				!scrollbarWrapperRef.current || 
+				!scrollbarThumbRef.current
+			) return;
+			
+			const tableWrapper = tableWrapperRef.current;
+			
+			const scrollRatio =
+				tableWrapper.scrollLeft /
+				(tableWrapper.scrollWidth - tableWrapper.clientWidth);
+			const maxThumbPosition =
+				scrollbarWrapperRef.current.clientWidth - scrollbarThumbRef.current.offsetWidth;
+			const thumbPosition = scrollRatio * maxThumbPosition;
+
+			scrollbarThumbRef.current.style.transform = `translateX(${thumbPosition}px)`;
+		};
 		
-		const secondTimer = setTimeout(() => {
-			const cleanup = checkAndUpdateScrollbar();
-			return () => {
-				if (cleanup) cleanup();
-			};
-		}, 500);
+		const handleTableScroll = () => {
+			updateThumbPosition();
+		};
+		
+		const initialTimer = setTimeout(updateScrollbarOnDataChange, 100);
+		const secondTimer = setTimeout(updateScrollbarOnDataChange, 500);
+		
+		const handleWindowResize = () => {
+			updateScrollbarOnDataChange();
+		};
+		
+		if (tableWrapperRef.current) {
+			tableWrapperRef.current.addEventListener("scroll", handleTableScroll);
+		}
+		
+		window.addEventListener("resize", handleWindowResize);
 		
 		return () => {
-			clearTimeout(timer);
+			clearTimeout(initialTimer);
 			clearTimeout(secondTimer);
+			window.removeEventListener("resize", handleWindowResize);
+			
+			if (tableWrapperRef.current) {
+				tableWrapperRef.current.removeEventListener("scroll", handleTableScroll);
+			}
 		};
-	}, [data, type, isDragging, startX, scrollLeft]);
+	}, [data, type]);
 
 	const defaultRenderRow = (item, index) => {
 		switch (type) {
