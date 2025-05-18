@@ -115,8 +115,30 @@
     .links {
         max-width: unset;
     }
+}
+
+@media (min-width: 1440px) {    
+    .wrapper::after {
+        left: -40px;
+        right: -40px;
+    }
+    
+    .logoOverlay {
+        display: flex;
+        align-items: center;
+        position: relative;
+        left: -20px;
+    }
+    
+    .menuBtn {
+        display: none;
+    }
+
+    .logoLink {
+        margin-right: 60px;
+    }
     
     .logoutWrapper {
-        display: none;
+        display: block;
     }
 }

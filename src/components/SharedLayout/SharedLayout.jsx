@@ -32,9 +32,11 @@ export const SharedLayout = () => {
 	return (
 		<div className={clsx(css.wrapper, "container")}>
 			<Header toggleSidebar={toggleSidebar} pageTitle={getPageTitle()} />
-			<Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-			<div>
-				<Outlet />
+			<div className={css.contentWrapper}>
+				<Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+				<div className={css.content}>
+					<Outlet />
+				</div>
 			</div>
 
 			{isLoading && <Loader />}

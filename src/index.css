@@ -77,7 +77,7 @@ body {
 @media (min-width: 1440px) {
     .container {
         max-width: 1440px;
-        padding-left: 100px;
-        padding-right: 100px;
+        padding-left: 40px;
+        padding-right: 40px;
     }
 }

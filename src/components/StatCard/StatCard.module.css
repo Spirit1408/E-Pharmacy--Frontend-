@@ -56,3 +56,9 @@
         line-height: 133%;
     }
 }
+
+@media (min-width: 1440px) {
+    .wrapper {
+        width: 240px;
+    }
+}

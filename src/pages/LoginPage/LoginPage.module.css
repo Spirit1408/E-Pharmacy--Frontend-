@@ -113,6 +113,8 @@
         gap: 150px;
         padding-top: 28px;
         padding-bottom: 242px;
+        padding-left: 100px !important;
+        padding-right: 100px !important;
     }
 
     .wrapper::before {

@@ -162,3 +162,15 @@
         max-width: 80px;
     }
 }
+
+@media (min-width: 1440px) {
+    .tableContainer {
+        margin-top: unset;
+        margin-bottom: unset;
+    }
+
+    .table td {
+        padding-top: 22px;
+        padding-bottom: 22px;
+    }
+}

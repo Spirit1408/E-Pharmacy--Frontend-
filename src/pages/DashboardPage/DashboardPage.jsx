@@ -32,8 +32,10 @@ export default function DashboardPage() {
 				<StatCard title="cust" value={totalCustomers} />
 			</div>
 
-			<UniversalTable type="recentCust" data={latestCustomers} />
-			<ExpTable />
+			<div className={css.tablesWrapper}>
+				<UniversalTable type="recentCust" data={latestCustomers} />
+				<ExpTable />
+			</div>
 		</div>
 	);
 }

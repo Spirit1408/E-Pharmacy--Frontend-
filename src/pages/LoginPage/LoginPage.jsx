@@ -11,7 +11,7 @@ export default function LoginPage() {
 	const error = useSelector(selectError);
 
 	return (
-		<div className={clsx(css.wrapper, "container")}>
+		<div className={clsx("container", css.wrapper)}>
 			{isLoading && <Loader />}
 
 			{error && toast.error(error)}

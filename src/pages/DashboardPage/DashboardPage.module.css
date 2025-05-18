@@ -14,9 +14,14 @@
     .wrapper {
         padding-bottom: 40px;
     }
-    
+
     .statsWrapper {
         flex-wrap: nowrap;
         margin-bottom: 40px;
+    }
+
+    .tablesWrapper {
+        display: flex;
+        gap: 20px;
     }
 }
