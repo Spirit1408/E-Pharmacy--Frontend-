@@ -106,3 +106,26 @@
         max-width: 614px;
     }
 }
+
+@media (min-width: 1440px) {
+    .wrapper {
+        flex-direction: row;
+        gap: 150px;
+        padding-top: 28px;
+        padding-bottom: 242px;
+    }
+
+    .wrapper::before {
+        top: 194px;
+        right: 745px;
+    }
+
+    .wrapper::after {
+        right: -185px;
+        bottom: -88px;
+    }
+
+    .logoWrapper {
+        margin-bottom: 226px;
+    }
+}

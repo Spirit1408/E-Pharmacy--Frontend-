@@ -90,3 +90,15 @@
         max-width: 323px;
     }
 }
+
+@media (min-width: 1440px) {
+    .form {
+        margin-bottom: unset;
+        margin-top: 279px;
+        width: 323px;
+    }
+
+    .inputs {
+        margin-bottom: 37px;
+    }
+}
