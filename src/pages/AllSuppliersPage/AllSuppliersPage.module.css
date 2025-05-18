@@ -40,3 +40,10 @@
         max-width: 196px;
     }
 }
+
+@media (min-width: 1440px) {
+    .wrapper {
+        padding-top: 75px;
+        padding-bottom: 40px;
+    }
+}
