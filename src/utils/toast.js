@@ -23,4 +23,6 @@ export const authToasts = {
 	logoutError: () => showErrorToast("Logout error"),
 	sessionExpired: () => showWarningToast("Session expired"),
 	unauthorized: () => showErrorToast("Unauthorized"),
+	registerSuccess: () => showSuccessToast("Registration successful. You may log in using your credentials"),
+	registerError: (message) => showErrorToast(message || "Registration error"),
 };

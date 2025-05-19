@@ -6,10 +6,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import sprite from "/sprite.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../redux/auth/operations";
+import { login, register as registerUser } from "../../redux/auth/operations";
 import { selectError, selectIsLoading } from "../../redux/auth/selectors";
 
-const schema = yup.object({
+const loginSchema = yup.object({
 	email: yup
 		.string()
 		.matches(
@@ -23,11 +23,30 @@ const schema = yup.object({
 		.min(6, "Password must be at least 6 characters"),
 });
 
+const registerSchema = yup.object({
+    name: yup
+        .string()
+        .required("Name is required")
+        .min(2, "Name must contain at least 2 characters"),
+    email: yup
+        .string()
+        .matches(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            "Invalid format",
+        )
+        .required("Email is required"),
+    password: yup
+        .string()
+        .required("Password is required")
+        .min(6, "Password must be at least 6 characters"),
+});
+
 export const LoginForm = () => {
 	const [showPassword, setShowPassword] = useState(false);
 	const dispatch = useDispatch();
 	const error = useSelector(selectError);
 	const isLoading = useSelector(selectIsLoading);
+	const [isRegistration, setIsRegistration] = useState(false);
 
 	const {
 		register,
@@ -35,12 +54,17 @@ export const LoginForm = () => {
 		formState: { errors, dirtyFields, isValid },
 		reset,
 	} = useForm({
-		resolver: yupResolver(schema),
+		resolver: yupResolver(isRegistration ? registerSchema : loginSchema),
 		mode: "onChange",
 	});
 
 	const onSubmit = (data) => {
-		dispatch(login(data));
+		if (isRegistration) {
+			dispatch(registerUser(data));
+			setIsRegistration(false);
+		} else {
+			dispatch(login(data));
+		}
 		reset();
 	};
 
@@ -48,9 +72,30 @@ export const LoginForm = () => {
 		setShowPassword((prev) => !prev);
 	};
 
+	const toggleFormMode = () => {
+		setIsRegistration((prev) => !prev);
+		reset();
+	};
+
 	return (
 		<form className={css.form} onSubmit={handleSubmit(onSubmit)}>
 			<div className={css.inputs}>
+				{isRegistration && (
+					<div className={css.inputWrapper}>
+						<input
+							type="text"
+							placeholder="Name"
+							className={clsx({
+								[css.green]: dirtyFields.name && !errors.name,
+							})}
+							{...register("name")}
+						/>
+						{errors.name && (
+							<p className={css.errorText}>{errors.name.message}</p>
+						)}
+					</div>
+				)}
+
 				<div className={css.inputWrapper}>
 					<input
 						type="text"
@@ -103,7 +148,11 @@ export const LoginForm = () => {
 				className={css.submitButton}
 				disabled={!isValid || isLoading}
 			>
-				{isLoading ? "Loading..." : "Log In"}
+				{isLoading ? "Loading..." : isRegistration ? "Register" : "Log In"}
+			</button>
+
+			<button type="button" className={css.toggleForm} onClick={toggleFormMode}>
+				{isRegistration ? "Already have an account?" : "Don't have an account?"}
 			</button>
 		</form>
 	);

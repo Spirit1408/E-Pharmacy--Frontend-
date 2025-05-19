@@ -60,3 +60,17 @@ export const refreshUser = createAsyncThunk(
 		}
 	},
 );
+
+export const register = createAsyncThunk(
+	"auth/register",
+	async (credentials, thunkAPI) => {
+		try {
+			const response = await axios.post("/user/register", credentials);
+			authToasts.registerSuccess();
+			return response.data.data;
+		} catch (e) {
+			authToasts.registerError(e.response?.data?.message);
+			return thunkAPI.rejectWithValue(e.response?.data?.message || e.message);
+		}
+	},
+);
